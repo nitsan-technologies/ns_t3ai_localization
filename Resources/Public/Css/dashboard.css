@@ -1,0 +1,90 @@
+.t3ai-module {
+    --module-bg: #eaeaea;
+    --module-color:inherit;
+    --module-dark-bg:#333;
+    --module-dark-color:#ccc;
+    --module-docheader-height:67px;
+    --module-docheader-zindex:300;
+    --module-docheader-padding-y:5px;
+    --module-docheader-padding-x:24px;
+    --module-docheader-padding:var(--module-docheader-padding-y) var(--module-docheader-padding-x);
+    --module-docheader-spacing-y:4px;
+    --module-docheader-spacing-x:8px;
+    --module-docheader-spacing:var(--module-docheader-spacing-y) var(--module-docheader-spacing-x);
+    --module-docheader-bg:#eee;
+    --module-docheader-border:#c3c3c3;
+    --module-docheader-bar-height:26px;
+    --module-docheader-scroll-offset:calc(-1 * (var(--module-docheader-bar-height) + var(--module-docheader-padding-y)));
+    --module-body-padding-y:24px;
+    --module-body-padding-x:24px;
+    --module-body-padding:var(--module-body-padding-y) var(--module-body-padding-x)
+}
+.t3ai-module .dashboard-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:calc(-1 * var(--module-body-padding-y)) calc(-1 * var(--module-body-padding-x)) var(--module-body-padding-y);padding:var(--module-body-padding-y) var(--module-body-padding-x) 0;background:#dadada;border-bottom:1px solid #cdcdcd}
+.t3ai-module .dashboard-tabs {display:flex;flex-wrap:wrap;align-items:center}
+.t3ai-module .dashboard-tab{padding:12px 15px;margin-right: 3px;}
+
+
+/*Dashboard*/
+.dashboard-tab {
+    border: 0;
+}
+
+.card.favorites-teaser {
+    background-color: #fff;
+}
+
+#dashboardTab h2 {
+    margin-top: 0;
+}
+
+.dashboard-tab.active {
+    background: var(--bs-blue);
+    color: #fff;
+}
+
+.dashboard-tab.active:focus,
+.dashboard-tab.active:hover {
+    text-decoration: none;
+    background: var(--bs-blue);
+    color: #f2f2f2;
+}
+
+.card.selected .widget-actions {
+    opacity: 1;
+}
+
+.card.selected .widget-actions .icon-actions-heart-alt {
+    display: block;
+}
+
+.widget-action-wishlist *,
+.dashboard-modal-item-block * ,
+.guide-btn * {
+    pointer-events: none;
+}
+
+.dashboard-modal-item-block + .guide-btn {
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+}
+
+.card.selected .widget-actions .icon-actions-heart,
+.widget-action-wishlist .icon-actions-heart-alt {
+    display: none;
+}
+
+.dashboard-tab-favorite,
+.dashboard-tab.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+.dashboard-tab-favorite.selected {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.widget.disabled {
+    opacity: 0.7;
+    box-shadow: none;
+}
