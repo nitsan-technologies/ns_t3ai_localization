@@ -1,0 +1,31 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+     data-namespace-typo3-fluid="true">
+<f:layout name="{f:if(condition: '{t3version} >= 12', then: 'Default', else: 'V11/Default')}" />
+<f:section name="content">
+    <div class="ns-t3ai modal d-block">
+        <div class="t3ai-modal-content modal-content">
+            <div class="t3js-modal-body modal-body">
+                <f:if condition="{pageTitle}">
+                    <h2 class="mb-4">{pageTitle}</h2>
+                </f:if>
+                <div class="tab-content" id="xlf-localization-form">
+                    <f:render partial="Localization" arguments="{_all}" />
+                    <div id="ns-t3ai__loader">
+                        <core:icon identifier="t3ai-loading" size="large" />
+                        <span class="loader-text"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="t3js-modal-footer modal-footer">
+                <div class="row justify-content-between w-100 row-cols-auto g-0 align-items-center">
+                    <div class="col">
+                        <button class="btn btn-default" name="no" t3ai-modal="close">
+                            <core:icon identifier="actions-close" size="small" />{f:translate(key: 'LLL:EXT:ns_t3ai_localization/Resources/Private/Language/locallang.xlf:confirmModal.close')}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:section>
+

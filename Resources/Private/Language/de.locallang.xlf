@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2"
+	xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" target-language="de" datatype="plaintext" original="EXT:ns_t3ai_localization/Resources/Private/Language/locallang.xlf" date="2024-09-10T14:28:38Z" product-name="ns_t3ai_localization">
+		<header/>
+		<body>
+			<trans-unit id="module.translation">
+				<source>Translation</source>
+				<target>Übersetzung</target>
+			</trans-unit>
+			<trans-unit id="translation.extensions-localization-xlf">
+				<source>Extensions Localization (XLF)</source>
+				<target>Erweiterungen Lokalisierung (XLF)</target>
+			</trans-unit>
+			<trans-unit id="create.localization">
+				<source>New Localization (XLF)</source>
+				<target>Neue Lokalisierung (XLF)</target>
+			</trans-unit>
+			<trans-unit id="translation.extensions-localization-xlf.desc">
+				<source>Make your TYPO3 extensions for a global audience with easy-to-use XLF file AI translations for easy localization.</source>
+				<target>Machen Sie Ihre TYPO3-Extensions für ein globales Publikum mit einfach zu bedienenden XLF-Datei AI Übersetzungen für eine einfache Lokalisierung.</target>
+			</trans-unit>
+			<trans-unit id="translation.extensions-localization-xlf.btn">
+				<source>Start AI Localizing</source>
+				<target>Start AI-Lokalisierung</target>
+			</trans-unit>
+			<trans-unit id="localization">
+				<source>Localization/Translation</source>
+				<target>Lokalisierung/Übersetzung</target>
+			</trans-unit>
+			<trans-unit id="traslation.module.installExtensions">
+				<source>Installed Extensions</source>
+				<target>Installierte Erweiterungen</target>
+			</trans-unit>
+			<trans-unit id="traslation.module.translate.file_name">
+				<source>Choose the default language file name</source>
+				<target>Dateiname der Standardsprache auswählen</target>
+			</trans-unit>
+			<trans-unit id="traslation.module.translate.mode">
+				<source>Translation Mode</source>
+				<target>Übersetzungsmodus</target>
+			</trans-unit>
+			<trans-unit id="traslation.module.translate.option1">
+				<source>Translate the entire file and overwrite any existing translations</source>
+				<target>Die gesamte Datei übersetzen, bestehende Übersetzungen überschreiben</target>
+			</trans-unit>
+			<trans-unit id="traslation.module.translate.option2">
+				<source>Translate only the missing items</source>
+				<target>Nur fehlende Elemente übersetzen</target>
+			</trans-unit>
+			<trans-unit id="traslation.module.translateBtn">
+				<source>Translate File</source>
+				<target>Datei übersetzen</target>
+			</trans-unit>
+			<trans-unit id="traslation.module.translate.targetLanguage">
+				<source>Choose the target language</source>
+				<target>Wählen Sie die Zielsprache</target>
+			</trans-unit>
+			<trans-unit id="traslation.module.translate.extension">
+				<source>Select Extension</source>
+				<target>Erweiterung auswählen</target>
+			</trans-unit>
+			<trans-unit id="confirmModal.yes">
+				<source>Yes, discard my changes.</source>
+				<target>Ja, verwerfe meine Änderungen</target>
+			</trans-unit>
+			<trans-unit id="confirmModal.cancel">
+				<source>No, I will continue editing.</source>
+				<target>Nein, ich werde weiter bearbeiten.</target>
+			</trans-unit>
+			<trans-unit id="confirmModal.currentPage.modal.message">
+				<source>Are you sure you want to discard these changes?</source>
+				<target>Sind Sie sicher, dass Sie diese Änderungen verwerfen wollen?</target>
+			</trans-unit>
+			<trans-unit id="confirmModal.newPage.modal.header">
+				<source>Do you want to close without saving?</source>
+				<target>Möchten Sie schließen, ohne zu speichern?</target>
+			</trans-unit>
+			<trans-unit id="translation.fetchingDataSuccessful.title">
+				<source>Data successfully retrieved.</source>
+				<target>Erfolgreich abgeholte Daten</target>
+			</trans-unit>
+			<trans-unit id="localizationSettings">
+                <source>Language Translation</source>
+				<target>Übersetzung von Sprachen</target>
+            </trans-unit>
+			<trans-unit id="translation.translateXlf.submit.validate">
+				<source>Save translations to the file system.</source>
+				<target>Übersetzungen ins Dateisystem schreiben</target>
+			</trans-unit>
+			<trans-unit id="translation.translateXlf.back" resname="translation.translateXlf.back">
+				<source>Go Back (File Will Not Be Saved)</source>
+				<target>Zurückgehen (Datei wird nicht gespeichert)</target>
+			</trans-unit>
+			<trans-unit id="traslation.write.success.message">
+				<source>Translation file created successfully</source>
+				<target>Übersetzungsdatei erfolgreich erstellt</target>
+			</trans-unit>
+			<trans-unit id="traslation.write.success.title">
+				<source>Translation Success</source>
+				<target>Übersetzung erfolgreich</target>
+			</trans-unit>
+			<trans-unit id="traslation.translationGenerationSuccessful.title">
+				<source>Translation completed successfully.</source>
+				<target>Übersetzung erfolgreich</target>
+			</trans-unit>
+			<trans-unit id="translation.translationGenerationSuccessful.message">
+				<source>The new translations have been saved to the file system.</source>
+				<target>Die neuen Übersetzungen werden in das Dateisystem geschrieben.</target>
+			</trans-unit>
+			<trans-unit id="traslation.generation.error">
+				<source>An unexpected error occurred.</source>
+				<target>Unerwarteter Fehler</target>
+			</trans-unit>
+			<trans-unit id="traslation.errorWritingTranslationFile.message">
+				<source>There was an issue while saving the translations.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

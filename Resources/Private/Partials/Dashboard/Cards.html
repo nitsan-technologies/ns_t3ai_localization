@@ -1,0 +1,51 @@
+<div class="card-container">
+    <div class="card card-size-small widget favorites-teaser">
+        <div class="card-header">
+            <div class="card-icon">
+                <core:icon identifier="actions-code-merge-localization" size="default" />
+            </div>
+            <div class="card-header-body">
+                <h2 class="card-title padding-right-lg"><f:translate key="translation.extensions-localization-xlf" extensionName="ns_t3ai_localization" /></h2>
+                <span class="card-subtitle"><f:translate key="translation.extensions-localization-xlf.btn" extensionName="ns_t3ai_localization" /></span>
+            </div>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><f:translate key="translation.extensions-localization-xlf.desc" extensionName="ns_t3ai_localization" /></p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <a href="{f:uri.action(action: 'history', controller: 'T3AiLocalization')}" class="btn btn-default">
+                Start AI Localizing
+            </a>
+
+            <f:be.link route="translation_history" parameters="{action: 'history', controller: 'T3AiLocalization'}" class="btn btn-default">
+                <f:translate key="LLL:EXT:backend/Resources/Private/Language/locallang_mfa.xlf:overview.editLinkLabel"/>
+            </f:be.link>
+            
+            <button type="button" class="btn btn-default" data-identifier="globalWizardBtn"
+                data-modal-size="large" title="{f:translate(key: 'translation.extensions-localization-xlf', extensionName:'ns_t3ai_localization')}"
+                data-additionalParams="{card.additionalParams}" data-url=""
+                data-button="{card.buttonData}"><f:translate key="translation.extensions-localization-xlf.btn" extensionName="ns_t3ai_localization" /></button>
+        </div>
+    </div>
+    <div class="card card-size-small widget favorites-teaser">
+        <div class="card-header">
+            <div class="card-icon">
+                <core:icon identifier="actions-code-merge-localization" size="default" />
+            </div>
+            <div class="card-header-body">
+                <h2 class="card-title padding-right-lg"><f:translate key="create.localization" extensionName="ns_t3ai_localization" /></h2>
+                <span class="card-subtitle"><f:translate key="translation.extensions-localization-xlf.btn" extensionName="ns_t3ai_localization" /></span>
+            </div>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><f:translate key="translation.extensions-localization-xlf.desc" extensionName="ns_t3ai_localization" /></p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-default" data-identifier="globalWizardBtn"
+                data-modal-size="large" title="{f:translate(key: 'create.localization', extensionName:'ns_t3ai_localization')}"
+                data-additionalParams="{card.additionalParams}" data-url=""
+                data-button="file_localization"><f:translate key="translation.extensions-localization-xlf.btn" extensionName="ns_t3ai_localization" /></button>
+        </div>
+    </div>
+</div>
+
