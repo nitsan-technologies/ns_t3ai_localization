@@ -12,8 +12,7 @@
         "issues": "https://t3planet.com/support"
     },
     "require": {
-        "typo3/cms-core": "^11.5",
-        "nitsan/ns-t3ai": ">=1.0.0"
+        "typo3/cms-core": "^11.5"
     },
     "autoload": {
         "psr-4": {

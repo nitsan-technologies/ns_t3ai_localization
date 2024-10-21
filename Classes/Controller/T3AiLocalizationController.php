@@ -1,7 +1,6 @@
 <?php
 
 namespace NITSAN\NsT3AiLocalization\Controller;
-
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Localization\Locales;
 use TYPO3\CMS\Core\Http\RedirectResponse;
@@ -13,6 +12,7 @@ use NITSAN\NsT3AiLocalization\Utility\XliffUtility;
 use TYPO3\CMS\Extensionmanager\Utility\ListUtility;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use NITSAN\NsT3AiLocalization\Domain\Repository\LocalizationLogRepository;
+
 
 
 

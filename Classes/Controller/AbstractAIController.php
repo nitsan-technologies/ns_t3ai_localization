@@ -121,6 +121,7 @@ abstract class AbstractAIController extends ActionController
 
     }
 
+
     protected function addFlashNotification(array $response = [])
     {
         if ($response && (isset($response['message']) || isset($response['title']))) {
