@@ -24,7 +24,7 @@ defined('TYPO3') || die();
                 'extensionName' => 'NsT3aiLocalization',
             ]
         );
-      
+
     }
 
 })();

@@ -6,13 +6,12 @@ use TYPO3\CMS\Core\Localization\Locales;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Psr\Http\Message\ServerRequestInterface;
-use NITSAN\NsT3Ai\Service\NsT3AiContentService;
+use NITSAN\NsT3AiLocalization\Service\TranslationService;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use NITSAN\NsT3AiLocalization\Utility\XliffUtility;
 use TYPO3\CMS\Extensionmanager\Utility\ListUtility;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use NITSAN\NsT3AiLocalization\Domain\Repository\LocalizationLogRepository;
-
 
 
 
@@ -23,19 +22,19 @@ class T3AiLocalizationController extends AbstractAIController
 
     protected Locales $locales;
 
-    protected NsT3AiContentService $contentService;
+    protected TranslationService $translationService;
 
     protected LocalizationLogRepository $localizationlogRepository;
 
 
     public function __construct(
-        NsT3AiContentService $contentService,
-        LocalizationLogRepository $localizationlogRepository
+        LocalizationLogRepository $localizationlogRepository,
+        TranslationService $translationService
     )
     {
         parent::__construct();
         $this->loadAssets();
-        $this->contentService = $contentService;
+        $this->translationService = $translationService;
         $this->localizationlogRepository = $localizationlogRepository;
         $this->locales = GeneralUtility::makeInstance(Locales::class);
     }
@@ -59,11 +58,13 @@ class T3AiLocalizationController extends AbstractAIController
 
     public function indexAction(ServerRequestInterface $request)
     {
-        
         $listUtility = GeneralUtility::makeInstance(ListUtility::class);
-        $availableExtensions = $listUtility->getAvailableExtensions('Local');
+        $coreExtensions = $listUtility->getAvailableExtensions('System');
+        $localExtensions = $listUtility->getAvailableExtensions('Local');
+        $availableExtensions = array_merge($coreExtensions,$localExtensions);
+        
         $languages = $this->locales->getLanguages();
-
+        
         if (array_key_exists('default', $languages)) {
             unset($languages['default']);
         }
@@ -76,10 +77,11 @@ class T3AiLocalizationController extends AbstractAIController
         ];
         
         $responseData = $request->getQueryParams() ?? [];
+
         $this->addFlashNotification($responseData);
 
         $requestData = $request->getParsedBody();
-        $extension = $requestData['extensionKey'] ?? $responseData['extensionKey'] ?? null;
+        $extension = $requestData['extensionKey'] ?? $responseData['additionalParams'] ?? null;
 
         if($availableExtensions){
             foreach($availableExtensions as $extkey => $value){
@@ -89,13 +91,13 @@ class T3AiLocalizationController extends AbstractAIController
             
             $this->pageRenderer->addInlineSetting('ExtensionFiles', 'fileOptions', $fileOptions);
         }
-        
+            
         if ($extension) {
             $assign['extkey'] = $extension;
             $xlfUtility = GeneralUtility::makeInstance(XliffUtility::class);
             $assign['files'] = $xlfUtility->getFileList($availableExtensions[$assign['extkey']]);
         }
-
+        
         return $this->getViewAndTemplate($request, $assign, 'Templates/', 'T3AiLocalization/Index');
     }
 
@@ -147,7 +149,7 @@ class T3AiLocalizationController extends AbstractAIController
                 $response = [];
                 $translationSubParts = array_chunk($translations, 20, true);
                 foreach ($translationSubParts as $subpart) {
-                    $responseJson = $this->contentService->requestAi(
+                    $responseJson = $this->translationService->requestAi(
                         'Input JSON:\n ' . json_encode($subpart),
                         'openAiPromptXlfTranslation',
                         '',

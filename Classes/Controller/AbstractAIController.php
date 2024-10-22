@@ -13,7 +13,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
-use NITSAN\NsT3Ai\Service\NsT3AiContentService;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Core\Page\JavaScriptModuleInstruction;
@@ -22,7 +21,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 abstract class AbstractAIController extends ActionController
 {
-
 
     protected UriBuilder $backendUriBuilder;
 
@@ -103,19 +101,10 @@ abstract class AbstractAIController extends ActionController
     protected function loadAssets(): void
     {
         if (version_compare($this->typo3VersionArray['version_main'], 11, '<=')) {
-            $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/NsT3aiLocalization/v11/global-action-button');
-            $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/NsT3aiLocalization/v11/translation-wizard-manipulation');
             $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/NsT3aiLocalization/module-functionality');
-
         } else {
-            $this->pageRenderer->loadJavaScriptModule('@nitsan/ns-t3ai-localization/global-action-button.js');
-            $this->pageRenderer->loadJavaScriptModule('@nitsan/ns-t3ai-localization/translation-wizard-manipulation.js');
             $this->pageRenderer->loadJavaScriptModule('@nitsan/ns-t3ai-localization//module-functionality,js');
         }
-        // CSS FILES
-        $this->pageRenderer->addCssFile('EXT:ns_t3ai_localization/Resources/Public/Css/dashboard.css');
-        $this->pageRenderer->addCssFile('EXT:dashboard/Resources/Public/Css/dashboard.css');
-        $this->pageRenderer->addCssFile('EXT:dashboard/Resources/Public/Css/Modal/style.css');
         $this->pageRenderer->addInlineSetting('', 't3version', $this->typo3VersionArray['version_main']);
         $this->pageRenderer->addInlineLanguageLabelFile('EXT:ns_t3ai_localization/Resources/Private/Language/locallang.xlf');
 

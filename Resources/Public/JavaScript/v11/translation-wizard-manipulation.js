@@ -77,16 +77,7 @@ define([
               if (iframeDocument.find('.t3ai-modal-content').length) {
                 formChanged(iframeDocument.find('.t3ai-modal-content'));
               }
-  
-              const reportBtn = iframeDocument.find('button[data-button="ai_techies_report_issue"]');
-              if (reportBtn.length) {
-                reportBtn.attr('data-additionalparams', title.trim());
-              }
-  
-              const featureReqBtn = iframeDocument.find('button[data-button="ai_techies_suggest_features"]');
-              if (featureReqBtn.length) {
-                featureReqBtn.attr('data-additionalparams', title.trim());
-              }
+            
             });
   
             currentModal[0].addEventListener('shown.bs.modal', function () {

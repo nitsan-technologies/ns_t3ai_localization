@@ -1,0 +1,19 @@
+# cat=OpenAI Settings//10; type=string; label=API Key
+openaiApiKey =
+# cat=OpenAI Settings//11; type=options[o1-preview, o1-mini, gpt-4o, gpt-4, gpt-3.5-turbo]; label=Model
+openaiApiModel = 
+
+# cat=Deepl Settings/12; type=string; label= Deepl API Key
+deeplApiKey =
+# cat=Deepl Settings/13; type=string; label= Deepl API Url
+deeplApiUrl = https://api-free.deepl.com/v2/translate
+
+# cat=Google Translate Settings/14; type=string; label= Google translate API Key
+googleApiKey =
+# cat=Google Translate Settings/15; type=string; label= Google translate API Url
+googleApiUrl = https://translation.googleapis.com/language/translate/v2
+
+# cat=Gemini settings//16; type=string; label=API Key
+geminiApiKey =
+# cat=Gemini settings//17; type=options[gemini-1.5-pro, gemini-1.5-flash, gemini-1.0-pro, gemini-pro-vision, text-embedding-004]; label=Model
+geminiApiModel = 

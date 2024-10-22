@@ -1,0 +1,7 @@
+module.tx_extensionmanager {
+	view {
+        templateRootPaths {
+            110 = EXT:ns_t3ai_localization/Resources/Private/Templates/
+        }
+    }
+}

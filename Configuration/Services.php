@@ -1,6 +1,6 @@
 <?php
 
-use NITSAN\NsT3Ai\Service\NsT3AiContentService;
+use NITSAN\NsT3AiLocalization\Service\TranslationService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use NITSAN\NsT3AiLocalization\Controller\T3AiLocalizationController;
 use NITSAN\NsT3AiLocalization\Domain\Repository\LocalizationLogRepository;
@@ -26,7 +26,7 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
         ]);
 
     $services->set(T3AiLocalizationController::class)
-        ->arg('$contentService', new ReferenceConfigurator(NsT3AiContentService::class))
+        ->arg('$translationService', new ReferenceConfigurator(TranslationService::class))
         ->arg('$localizationlogRepository', new ReferenceConfigurator(LocalizationLogRepository::class))
         ->public();
 
