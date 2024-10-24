@@ -36,13 +36,18 @@ if(TYPO3.settings.ExtensionFiles){
 document.querySelectorAll('.localizationSaveBtn').forEach(function (button) {
     button.addEventListener("click", async function (ev) {
         ev.preventDefault();
-        let xlfValidateForm = document.querySelector('#localization-validate');
-        let formData = new FormData(xlfValidateForm);
-        let loaderIcon = document.querySelector('#localization-validate #ns-t3ai__loader');
+
+        let form = ev.target.closest('form');
+        let url = form.getAttribute('action');
+
+        // let xlfValidateForm = document.querySelector('#localization-validate');
+      
+        let formData = new FormData(form);
+        let loaderIcon = form.querySelector('#ns-t3ai__loader');
         loaderIcon.classList.add('ns-show-overlay');  // Show the loader
 
         try {
-            let status = await submitAjaxForm(formData, 'file_write');
+            let status = await submitAjaxForm(formData, url);
             // Show notifications based on TYPO3 version
             await loadNotificationModule(TYPO3.settings.t3version, status);
         } catch (error) {
@@ -92,19 +97,14 @@ function submitAjaxForm(formData, route) {
         request.open('POST', ajaxUrl, true);
 
         request.onload = function () {
+            console.log(request);
             let responseBody = JSON.parse(request.responseText);
-            if (responseBody.redirectUrl) {
-                setTimeout(function () {
-                    top.location.href = responseBody.redirectUrl;
-                }, 2500);
-            }
-            console.log(responseBody.status);
             resolve(!!responseBody.status);  // Resolve with boolean status
         };
 
-        request.onerror = function () {
-            reject(false);  // Reject with a false in case of an error
-        };
+        // request.onerror = function () {
+        //     reject(false);  // Reject with a false in case of an error
+        // };
 
         request.send(formData);
     });

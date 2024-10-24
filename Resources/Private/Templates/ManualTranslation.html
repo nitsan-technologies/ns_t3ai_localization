@@ -1,4 +1,4 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true"></html>
 <f:layout name="{f:if(condition: '{t3version} >= 12', then: 'Default', else: 'V11/Default')}" />
 <f:section name="content">
     <div class="t3js-modal-content modal-content">
@@ -6,8 +6,15 @@
             <f:if condition="{pageTitle}">
                 <h2 class="mb-4">{pageTitle}</h2>
             </f:if>
-            <div class="tab-content" id="xlf-localization-form">
-                <f:render partial="Localization" arguments="{_all}" />
+            <div class="tab-content" id="translation-form">
+                <f:if condition="{fileDataArray} || {fileData}">
+                    <f:then>
+                        <f:render partial="Localization/WriteTranslation" arguments="{_all}"/>
+                    </f:then>
+                    <f:else>
+                        <f:render partial="Translation" arguments="{_all}" />
+                    </f:else>
+                </f:if>
                 <div id="ns-t3ai__loader" class="d-none">
                     <core:icon identifier="spinner-circle" size="large" />
                     <span class="loader-text"></span>

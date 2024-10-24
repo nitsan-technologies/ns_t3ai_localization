@@ -1,0 +1,65 @@
+<h2 class="margin-bottom-md">Extension:{extkey}</h2>
+<f:flashMessages queueIdentifier="{flashMessageQueueIdentifier}" />
+<form method="post" action="">
+    <div class="form-section">
+        <div class="form-group">
+            <label class="form-label" for="fileName">
+                <f:translate key="traslation.module.translate.file_name" extensionName="ns_t3ai_localization" />
+            </label>
+            <select name="filename" class="form-select form-control" id="fileName" required>
+                <f:for each="{files}" as="file" key="fileName">
+                    <option value="{file}">{fileName}</option>
+                </f:for>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="targetLanguage">
+                <f:translate key="traslation.module.translate.targetLanguage" extensionName="ns_t3ai_localization" />
+            </label>
+            <select name="targetLanguage" class="form-select form-control" id="targetLanguage" required>
+                <option value="" disabled>{f:translate(key:'traslation.module.translate.targetLanguage', extensionName:
+                    'ns_t3ai_localization')}</option>
+                <f:for each="{allLanguagesList}" as="lang" key="key">
+                    <option value="{key}">{lang}</option>
+                </f:for>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label" for="fileLocation">File Location</label><br>
+            <f:if condition="{extensionType} === 'typo3-cms-extension'">
+                <input type="radio" id="local"  name="fileLocation" value="local">
+                <label for="local">Local</label><br>
+            </f:if>
+
+            <input type="radio" id="crowdin" name="fileLocation" value="crowdin" {f:if(condition: '{extensionType} === typo3-cms-framework', then: 'checked')}>
+            <label for="crowdin">Crowdin</label><br>
+        </div>
+
+
+        <div class="form-group">
+            <label class="form-label" for="projectId">Project-Id</label><br>
+            <input type="input" class="form-select" id="projectId" name="projectId" value="730787">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="fileId">File-Id</label><br>
+            <input type="input" class="form-select" id="fileId" name="fileId" value="5">
+        </div>
+
+
+        <div class="form-group">
+            <label class="form-label" for="editingMode">Editing mode</label><br>
+            <input type="radio" id="ui" name="editingMode" value="ui">
+            <label for="ui">UI Base</label><br>
+            <input type="radio" id="codePen" name="editingMode" value="codepen">
+            <label for="codePen">CodePen</label><br>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+                Send Request 
+            </button>
+        </div>
+    </div>
+</form>

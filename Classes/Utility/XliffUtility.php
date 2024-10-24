@@ -210,10 +210,10 @@ class XliffUtility
     }
 
 
-    public static function getFileList(array $extension): array
+    public static function getFileList(string $packagePath): array
     {
         $files = [];
-        $languageDirectory = $extension['packagePath'] . static::LANGUAGE_DIR;
+        $languageDirectory = $packagePath . static::LANGUAGE_DIR;
         $allLanguageFiles = GeneralUtility::getAllFilesAndFoldersInPath([], $languageDirectory . '/', 'xlf', false, 3);
         foreach ($allLanguageFiles as $file) {
             $filename = str_replace($languageDirectory . '/', '', $file);
@@ -296,6 +296,22 @@ class XliffUtility
             }
         }
         return json_encode($diff);
+    }
+
+    public function stringToArray($fileData): array
+    {
+        $xmlData = new \SimpleXMLElement($fileData);
+        $rawData = self::simpleXMLElementToArray($xmlData);
+
+        foreach ($rawData['file']['body']['trans-unit'] as &$unit) {
+            if (isset($unit['@id'])) {
+                $unit['id'] = $unit['@id'];  
+                unset($unit['@id']);         
+            }
+        }
+
+        return isset($rawData['file']) ? $rawData['file'] : [];
+       
     }
 
 }

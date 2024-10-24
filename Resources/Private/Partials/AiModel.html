@@ -1,0 +1,83 @@
+<div class="col">
+    <div class="accordion accordion-flush">
+        <div class="form-group">
+            <label class="form-label w-100">Select Your AI model</label>
+            <div class="justify-content-between" role="tablist">
+
+                <f:if condition="{extSettings.openaiApiKey}">
+                    <input type="radio" class="btn-check" name="apiModel" id="openaiFormFields"
+                        autocomplete="off" value="openai" checked="checked">
+                    <label class="btn btn-default btn-sm" data-bs-toggle="tab" data-bs-target="#collapseopenai"
+                        aria-expanded="false" aria-controls="collapseopenai" for="openaiFormFields"
+                        aria-selected="false" role="tab" tabindex="-1">OpenAI</label>
+
+                </f:if>
+
+                <f:if condition="{extSettings.geminiApiKey}">
+                    <input type="radio" class="btn-check" name="apiModel" id="geminiFormFields"
+                        autocomplete="off" value="gemini">
+                    <label class="btn btn-default btn-sm" data-bs-toggle="tab" data-bs-target="#collapsegemini"
+                        aria-expanded="false" aria-controls="collapsegemini" for="geminiFormFields"
+                        aria-selected="false" role="tab" tabindex="-1">Gemini</label>
+                </f:if>
+
+                <f:if condition="{extSettings.deeplApiKey}">
+                    <input type="radio" class="btn-check" name="apiModel" id="deepLFormFields"
+                        autocomplete="off" value="deepl">
+                    <label class="btn btn-default btn-sm" for="deepLFormFields">DeepL</label>
+                </f:if>
+
+                <f:if condition="{extSettings.googleApiKey}">
+                    <input type="radio" class="btn-check" name="apiModel" id="googleFormFields"
+                        autocomplete="off" value="google">
+                    <label class="btn btn-default btn-sm" for="googleFormFields">Google translate</label>
+                </f:if>
+
+            </div>
+        </div>
+
+
+        <f:comment>
+            <div class="collapse text-api-model-collapse" id="collapseopenai" role="tabpanel">
+                <div class="form-group">
+                    <input type="radio" class="btn-check text-api-model" name="openai-models" id="o1-previewFormFields"
+                        autocomplete="off" value="o1-preview">
+                    <label class="btn btn-default btn-sm" for="o1-previewFormFields">o1-preview</label>
+
+                    <input type="radio" class="btn-check text-api-model" name="openai-models" id="o1-miniFormFields"
+                        autocomplete="off" value="o1-mini">
+                    <label class="btn btn-default btn-sm" for="o1-miniFormFields">o1-mini</label>
+
+                    <input type="radio" class="btn-check text-api-model" name="openai-models" id="gpt-4oFormFields"
+                        autocomplete="off" value="gpt-4o">
+                    <label class="btn btn-default btn-sm" for="gpt-4oFormFields">gpt-4o</label>
+
+                    <input type="radio" class="btn-check text-api-model" name="openai-models" id="gpt-4FormFields"
+                        autocomplete="off" value="gpt-4">
+                    <label class="btn btn-default btn-sm" for="gpt-4FormFields">gpt-4</label>
+
+                    <input type="radio" class="btn-check text-api-model" name="openai-models"
+                        id="gpt-3.5-turboFormFields" autocomplete="off" value="gpt-3.5-turbo" checked="">
+                    <label class="btn btn-default btn-sm" for="gpt-3.5-turboFormFields">gpt-3.5-turbo</label>
+                </div>
+            </div>
+
+            <div class="collapse text-api-model-collapse" id="collapsegemini" role="tabpanel">
+                <div class="form-group">
+                    <input type="radio" class="btn-check text-api-model" name="gemini-models"
+                        id="gemini-1.5-proFormFields" autocomplete="off" value="gemini-1.5-pro">
+                    <label class="btn btn-default btn-sm" for="gemini-1.5-proFormFields">gemini-1.5-pro</label>
+
+                    <input type="radio" class="btn-check text-api-model" name="gemini-models"
+                        id="gemini-1.5-flashFormFields" autocomplete="off" value="gemini-1.5-flash">
+                    <label class="btn btn-default btn-sm" for="gemini-1.5-flashFormFields">gemini-1.5-flash</label>
+
+                    <input type="radio" class="btn-check text-api-model" name="gemini-models"
+                        id="gemini-1.0-proFormFields" autocomplete="off" value="gemini-1.0-pro" checked="">
+                    <label class="btn btn-default btn-sm" for="gemini-1.0-proFormFields">gemini-1.0-pro</label>
+                </div>
+            </div>
+        </f:comment>
+
+    </div>
+</div>

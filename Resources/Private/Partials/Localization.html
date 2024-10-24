@@ -1,47 +1,43 @@
-
-<div class="nschatbot">
-	<h2 class="margin-bottom-md"><f:translate key="LLL:EXT:ns_t3ai_localization/Resources/Private/Language/locallang.xlf:localization" /></h2>
-	<f:flashMessages queueIdentifier="{flashMessageQueueIdentifier}"/>
-	<div class="nschatbot-content-wrap">
-		<div class="form-section">
-			<form method="post" action="{validateDataUrl}">
-				<div class="form-group">
-					<label class="form-label" for="extKey"><f:translate key="traslation.module.installExtensions" extensionName="ns_t3ai_localization" /></label>
-					<select name="extensionKey" class="form-select form-control" id="extKey" required>
-						<option value="">{f:translate(key:'traslation.module.translate.extension', extensionName: 'ns_t3ai_localization')}</option>
-						<f:for each="{extensions}" as="extension">
-							<option value="{extension.key}" {f:if(condition: '{extkey} == {extension.key}', then: 'selected')}>{extension.title}</option>
-						</f:for>
-					</select>
-				</div>
-				<div class="form-group">
-					<label class="form-label" for="fileName"><f:translate key="traslation.module.translate.file_name" extensionName="ns_t3ai_localization" /></label>
-					<select name="filename[]" class="form-select form-control" id="fileName" multiple="multiple" required>
-						<f:for each="{files}" as="file" key="fileName">
-							<option value="{file}">{fileName}</option>
-						</f:for>
-					</select>
-				</div>
-				<div class="form-group">
-					<label class="form-label" for="targetLanguage"><f:translate key="traslation.module.translate.targetLanguage" extensionName="ns_t3ai_localization" /></label>
-					<select name="targetLanguage" class="form-select form-control" id="targetLanguage" required>
-						<option value="" disabled>{f:translate(key:'traslation.module.translate.targetLanguage', extensionName: 'ns_t3ai_localization')}</option>
-						<f:for each="{allLanguagesList}" as="lang" key="key">
-							<option value="{key}">{lang}</option>
-						</f:for>
-					</select>
-				</div>
-				<div class="form-group">
-					<label class="form-label" for="translationMode"><f:translate key="traslation.module.translate.mode" extensionName="ns_t3ai_localization" /></label><br>
-					<select name="translationMode" class="form-select form-control mb-4" id="targetLanguage" >
-						<option value="0"><f:translate key="traslation.module.translate.option1" extensionName="ns_t3ai_localization" /></option>
-						<option value="1"><f:translate key="traslation.module.translate.option2" extensionName="ns_t3ai_localization" /></option>
-					</select>
-				</div>
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary"><f:translate key="traslation.module.translateBtn" extensionName="ns_t3ai_localization" /></button>
-				</div>
-			</form>
+<h2 class="margin-bottom-md"><f:translate key="LLL:EXT:ns_t3ai_localization/Resources/Private/Language/locallang.xlf:localization" /></h2>
+<f:flashMessages queueIdentifier="{flashMessageQueueIdentifier}"/>
+<form method="post" action="{validateDataUrl}">
+	<f:render partial="AiModel" arguments="{extSettings:extSettings}" />
+	<div class="form-section">
+		<div class="form-group">
+			<label class="form-label" for="extKey"><f:translate key="traslation.module.installExtensions" extensionName="ns_t3ai_localization" /></label>
+			<select name="extensionKey" class="form-select form-control" id="extKey" required>
+				<option value="">{f:translate(key:'traslation.module.translate.extension', extensionName: 'ns_t3ai_localization')}</option>
+				<f:for each="{extensions}" as="extension">
+					<option value="{extension.key}" {f:if(condition: '{extkey} == {extension.key}', then: 'selected')}>{extension.title}</option>
+				</f:for>
+			</select>
+		</div>
+		<div class="form-group">
+			<label class="form-label" for="fileName"><f:translate key="traslation.module.translate.file_name" extensionName="ns_t3ai_localization" /></label>
+			<select name="filename[]" class="form-select form-control" id="fileName" multiple="multiple" required>
+				<f:for each="{files}" as="file" key="fileName">
+					<option value="{file}">{fileName}</option>
+				</f:for>
+			</select>
+		</div>
+		<div class="form-group">
+			<label class="form-label" for="targetLanguage"><f:translate key="traslation.module.translate.targetLanguage" extensionName="ns_t3ai_localization" /></label>
+			<select name="targetLanguage" class="form-select form-control" id="targetLanguage" required>
+				<option value="" disabled>{f:translate(key:'traslation.module.translate.targetLanguage', extensionName: 'ns_t3ai_localization')}</option>
+				<f:for each="{allLanguagesList}" as="lang" key="key">
+					<option value="{key}">{lang}</option>
+				</f:for>
+			</select>
+		</div>
+		<div class="form-group">
+			<label class="form-label" for="translationMode"><f:translate key="traslation.module.translate.mode" extensionName="ns_t3ai_localization" /></label><br>
+			<select name="translationMode" class="form-select form-control mb-4" id="targetLanguage" >
+				<option value="0"><f:translate key="traslation.module.translate.option1" extensionName="ns_t3ai_localization" /></option>
+				<option value="1"><f:translate key="traslation.module.translate.option2" extensionName="ns_t3ai_localization" /></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary"><f:translate key="traslation.module.translateBtn" extensionName="ns_t3ai_localization" /></button>
 		</div>
 	</div>
-</div>
+</form>

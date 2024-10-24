@@ -1,4 +1,5 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:t3ai="http://typo3.org/ns/NITSAN\NsT3AiLocalization\ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:t3ai="http://typo3.org/ns/NITSAN\NsT3AiLocalization\ViewHelpers" data-namespace-typo3-fluid="true">
 {namespace em=TYPO3\CMS\Extensionmanager\ViewHelpers}
 <f:layout name="main" />
 <f:section name="content">
@@ -19,7 +20,7 @@
                     </button>
                 </div>
             </div>
-           
+
             <div class="col">
                 <div class="btn-group">
                     <f:link.action action="index" controller="List"
@@ -172,13 +173,20 @@
                         </div>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-default {f:if(condition: '!{t3ai:validator()}', then: 'disabled')}" 
-                            data-identifier="localizationWizardBtn" data-modal-size="large" 
-                            title="Localization (XLF)" 
-                            data-additionalparams="{extension.key}" 
-                            data-model-class="" data-model-name="Localization" 
+                        <button type="button"
+                            class="btn btn-default {f:if(condition: '!{t3ai:validator()}', then: 'disabled')}"
+                            data-identifier="localizationWizardBtn" data-modal-size="large" title="Localization (XLF)"
+                            data-additionalparams="{extension.key}" data-model-class="" data-model-name="Localization"
                             data-button="{f:if(condition: '{t3ai:validator()}', then: 'file_localization')}">
                             <core:icon identifier="actions-translate" size="small" />
+                        </button>
+
+                        <button type="button"
+                            class="btn btn-default"
+                            data-identifier="localizationWizardBtn" data-modal-size="large" title="Manual translation"
+                            data-additionalparams="{extension.key}" data-model-class="" data-model-name="Translation"
+                            data-button="manual_translation">
+                            <core:icon identifier="actions-save-translation" size="small" />
                         </button>
                     </td>
                     </tr>
@@ -188,4 +196,5 @@
     </div>
 
 </f:section>
+
 </html>

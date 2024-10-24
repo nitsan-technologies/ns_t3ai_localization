@@ -2,87 +2,85 @@
     data-namespace-typo3-fluid="true">
 <f:layout name="{f:if(condition: '{t3version} >= 12', then: 'Default', else: 'V11/Default')}" />
 <f:section name="content">
-    <div class="ns-t3ai modal d-block">
-        <div class="t3ai-modal-content modal-content">
-            <div class="t3js-modal-body modal-body nschatbot-content-wrap">
-                <h2 class="mb-3">
-                    <f:translate key="localizationSettings" extensionName="ns_t3ai_localization" />
-                </h2>
-                <f:flashMessages queueIdentifier="{flashMessageQueueIdentifier}" />
-                <form name="input" method="post" id="localization-validate" action="/file-write">
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <a href="{mainPageUrl}" class="btn btn-secondary"> 
-                                    <f:translate key="translation.translateXlf.back" extensionName="ns_t3ai_localization" />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group text-end">
-                                <button type="submit" class="btn btn-primary localizationSaveBtn">
-                                    <core:icon identifier="actions-document-save" size="small" />
-                                    <f:translate key="translation.translateXlf.submit.validate" extensionName="ns_t3ai_localization" />
-                                </button>
-                            </div>        
-                        </div>
-                    </div>
-                    <div class="form-content">
-                        <input type="hidden" name="input[extensionKey]" value="{input.extensionKey}" />
-
-                        <input type="hidden" name="input[targetLanguage]" value="{input.targetLanguage}" />
-                        <input type="hidden" name="input[translationMode]" value="{input.translationMode}" />
-                        <f:for each="{originalValues}" as="originalValue" key="fileName" iteration="i">
-                            <div class="panel panel-default searchhit">
-                                <div class="panel-heading" role="tab" id="heading-{fileName}">
-                                    <h3 class="panel-title collapsed" role="button" data-bs-toggle="collapse"
-                                        href="#collapse-{i.cycle}-tab" aria-expanded="false"
-                                        aria-controls="collapse-{fileName}">
-                                        <span class="caret"></span>
-                                        <strong>{fileName}</strong>
-                                    </h3>
-                                </div>
-                                <input type="hidden" name="input[filename][]" value="{fileName}" />
-                                <div id="collapse-{i.cycle}-tab" class="panel-collapse collapse search-item"
-                                    role="tabpanel" aria-labelledby="heading-{fileName}">
-                                    <div class="panel-body">
-                                        <f:for each="{originalValue}" key="sourceKey" as="sourceValue">
-                                            <div class="form-group">
-                                                <label class="form-label"
-                                                    for="input[translations][{sourceKey}]">{sourceValue.source}</label>
-                                                <small>(<f:translate key="t3ai.id" extensionName="ns_t3ai_localization" /> {sourceKey})</small>
-                                                <f:if
-                                                    condition="123 > 250">
-                                                    <f:then>
-                                                        <textarea name="input[{fileName}][translations][{sourceKey}]"
-                                                            class="form-control">{sourceValue.translated.target}</textarea>
-                                                    </f:then>
-                                                    <f:else>
-                                                        <input name="input[{fileName}][translations][{sourceKey}]"
-                                                            value="{sourceValue.translated.target}"
-                                                            class="form-control" />
-                                                    </f:else>
-                                                </f:if>
-                                            </div>
-                                        </f:for>
-                                    </div>
-                                </div>
-                            </div>
-                        </f:for>
-                    </div>
-                    <div id="ns-t3ai__loader">
-                        <span class="loader-text">Hi</span>
-                    </div>
-                </form>
-            </div>
-            <div class="t3js-modal-footer modal-footer">
-                <div class="row justify-content-between w-100 row-cols-auto g-0 align-items-center">
-                  
+    <div class="t3ai-modal-content modal-content">
+        <div class="t3js-modal-body modal-body">
+            <h2 class="mb-3">
+                <f:translate key="localizationSettings" extensionName="ns_t3ai_localization" />
+            </h2>
+            <f:flashMessages queueIdentifier="{flashMessageQueueIdentifier}" />
+            <form name="input" method="post" id="localization-validate" action="file_write">
+                <div class="row">
                     <div class="col">
-                        <button class="btn btn-default" t3ai-modal="close">
-                            <core:icon identifier="actions-close" size="small" /><f:translate key="confirmModal.close" extensionName="ns_t3ai_localization" />
-                        </button>
+                        <div class="form-group">
+                            <a href="{mainPageUrl}" class="btn btn-secondary"> 
+                                <f:translate key="translation.translateXlf.back" extensionName="ns_t3ai_localization" />
+                            </a>
+                        </div>
                     </div>
+                    <div class="col">
+                        <div class="form-group text-end">
+                            <button type="submit" class="btn btn-primary localizationSaveBtn">
+                                <core:icon identifier="actions-document-save" size="small" />
+                                <f:translate key="translation.translateXlf.submit.validate" extensionName="ns_t3ai_localization" />
+                            </button>
+                        </div>        
+                    </div>
+                </div>
+                <div class="form-content">
+                    <input type="hidden" name="input[extensionKey]" value="{input.extensionKey}" />
+
+                    <input type="hidden" name="input[targetLanguage]" value="{input.targetLanguage}" />
+                    <input type="hidden" name="input[translationMode]" value="{input.translationMode}" />
+                    <f:for each="{originalValues}" as="originalValue" key="fileName" iteration="i">
+                        <div class="panel panel-default searchhit">
+                            <div class="panel-heading" role="tab" id="heading-{fileName}">
+                                <h3 class="panel-title collapsed" role="button" data-bs-toggle="collapse"
+                                    href="#collapse-{i.cycle}-tab" aria-expanded="false"
+                                    aria-controls="collapse-{fileName}">
+                                    <span class="caret"></span>
+                                    <strong>{fileName}</strong>
+                                </h3>
+                            </div>
+                            <input type="hidden" name="input[filename][]" value="{fileName}" />
+                            <div id="collapse-{i.cycle}-tab" class="panel-collapse collapse search-item"
+                                role="tabpanel" aria-labelledby="heading-{fileName}">
+                                <div class="panel-body">
+                                    <f:for each="{originalValue}" key="sourceKey" as="sourceValue">
+                                        <div class="form-group">
+                                            <label class="form-label"
+                                                for="input[translations][{sourceKey}]">{sourceValue.source}</label>
+                                            <small>(<f:translate key="t3ai.id" extensionName="ns_t3ai_localization" /> {sourceKey})</small>
+                                            <f:if
+                                                condition="123 > 250">
+                                                <f:then>
+                                                    <textarea name="input[{fileName}][translations][{sourceKey}]"
+                                                        class="form-control">{sourceValue.translated.target}</textarea>
+                                                </f:then>
+                                                <f:else>
+                                                    <input name="input[{fileName}][translations][{sourceKey}]"
+                                                        value="{sourceValue.translated.target}"
+                                                        class="form-control" />
+                                                </f:else>
+                                            </f:if>
+                                        </div>
+                                    </f:for>
+                                </div>
+                            </div>
+                        </div>
+                    </f:for>
+                </div>
+                <div id="ns-t3ai__loader" class="d-none">
+                    <core:icon identifier="spinner-circle" size="large" />
+                    <span class="loader-text"></span>
+                </div>
+            </form>
+        </div>
+        <div class="t3js-modal-footer modal-footer">
+            <div class="row">
+                <div class="col form-group text-end">
+                    <button class="btn btn-default" t3ai-modal="close">
+                        <core:icon identifier="actions-close" size="small" /><f:translate key="confirmModal.close" extensionName="ns_t3ai_localization" />
+                    </button>
                 </div>
             </div>
         </div>

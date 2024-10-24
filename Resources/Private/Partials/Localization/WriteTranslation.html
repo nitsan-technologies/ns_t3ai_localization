@@ -1,0 +1,70 @@
+<form name="input" method="post" id="translation-file-write" action="write_manual_translation">
+    <div class="row">
+        <div class="col">
+            <f:debug>{_all}</f:debug>
+            <div class="form-group">
+                <a href="{mainPageUrl}" class="btn btn-secondary">
+                    <f:translate key="translation.translateXlf.back" extensionName="ns_t3ai_localization" />
+                </a>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group text-end">
+                <button type="submit" class="btn btn-primary localizationSaveBtn">
+                    <core:icon identifier="actions-document-save" size="small" />
+                    <f:translate key="translation.translateXlf.submit.validate" extensionName="ns_t3ai_localization" />
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="form-content">
+        <div class="form-group">
+            <label class="form-label" for="projectId">Project-Id</label><br>
+            <input type="input" name="input[projectId]" value="{requestData.projectId}" class="form-control"
+                id="projectId" readonly />
+
+            <input type="input" name="input[fileLocation]" value="{requestData.fileLocation}" />
+            <input type="input" name="input[filename]" value="{requestData.filename}" />
+
+                
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="fileId">File-Id</label><br>
+            <input type="input" class="form-control" id="fileId" name="input[fileId]" value="{requestData.fileId}" readonly>
+        </div>
+        <f:if condition="{fileDataArray}">
+            <div class="panel panel-default searchhit">
+                <div class="panel-heading" role="tab" id="heading-{requestData.filename}">
+                    <h3 class="panel-title collapsed" role="button" data-bs-toggle="collapse" href="#collapse-tab"
+                        aria-expanded="false" aria-controls="collapse-{fileName}">
+                        <span class="caret"></span>
+                        <strong>{requestData.filename}</strong>
+                    </h3>
+                </div>
+                <div id="collapse-tab" class="panel-collapse collapse search-item" role="tabpanel"
+                    aria-labelledby="heading-{requestData.filename}">
+                    <div class="panel-body">
+                        <f:for each="{fileDataArray.body.trans-unit}" key="sourceKey" as="sourceValue">
+                            <div class="form-group">
+                                <label class="form-label"
+                                    for="input[translations][{sourceKey}]">{sourceValue.id}</label>
+                                <input name="input[translations][{sourceKey}]" value="{sourceValue.source}"
+                                    class="form-control" />
+                            </div>
+                        </f:for>
+                    </div>
+                </div>
+            </div>
+        </f:if>
+        <f:if condition="{fileData}">
+            <div class="form-group">
+                <label class="form-label" for="input[content]">File Content</label>
+                <textarea name="input[content]" class="form-control" rows="20">{fileData}</textarea>
+            </div>
+        </f:if>
+    </div>
+    <div id="ns-t3ai__loader" class="d-none">
+        <core:icon identifier="spinner-circle" size="large" />
+        <span class="loader-text"></span>
+    </div>
+</form>

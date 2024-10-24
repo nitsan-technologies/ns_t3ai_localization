@@ -15,5 +15,5 @@ $EM_CONF['ns_t3ai_localization'] = [
         ],
         'conflicts' => [],
         'suggests' => [],
-    ],
+    ]
 ];

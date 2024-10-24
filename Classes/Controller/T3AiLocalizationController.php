@@ -6,11 +6,12 @@ use TYPO3\CMS\Core\Localization\Locales;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Psr\Http\Message\ServerRequestInterface;
-use NITSAN\NsT3AiLocalization\Service\TranslationService;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use NITSAN\NsT3AiLocalization\Utility\XliffUtility;
 use TYPO3\CMS\Extensionmanager\Utility\ListUtility;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use NITSAN\NsT3AiLocalization\Service\TranslationService;
 use NITSAN\NsT3AiLocalization\Domain\Repository\LocalizationLogRepository;
 
 
@@ -59,10 +60,8 @@ class T3AiLocalizationController extends AbstractAIController
     public function indexAction(ServerRequestInterface $request)
     {
         $listUtility = GeneralUtility::makeInstance(ListUtility::class);
-        $coreExtensions = $listUtility->getAvailableExtensions('System');
-        $localExtensions = $listUtility->getAvailableExtensions('Local');
-        $availableExtensions = array_merge($coreExtensions,$localExtensions);
-        
+        $availableExtensions = $listUtility->getAvailableExtensions('');
+            
         $languages = $this->locales->getLanguages();
         
         if (array_key_exists('default', $languages)) {
@@ -74,6 +73,7 @@ class T3AiLocalizationController extends AbstractAIController
             'extensions' => $availableExtensions,
             'templateLayout' => 'T3AiLocalization/Index',
             'validateDataUrl' => $this->generateBackendUrl('ajax_file_translate'),
+            'extSettings' => GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('ns_t3ai_localization')
         ];
         
         $responseData = $request->getQueryParams() ?? [];
@@ -86,7 +86,7 @@ class T3AiLocalizationController extends AbstractAIController
         if($availableExtensions){
             foreach($availableExtensions as $extkey => $value){
                 $xlfUtility = GeneralUtility::makeInstance(XliffUtility::class);
-                $fileOptions[$extkey] = array_values($xlfUtility->getFileList($availableExtensions[$extkey]));
+                $fileOptions[$extkey] = array_values($xlfUtility->getFileList($availableExtensions[$extkey]['packagePath']));
             }
             
             $this->pageRenderer->addInlineSetting('ExtensionFiles', 'fileOptions', $fileOptions);
@@ -95,7 +95,7 @@ class T3AiLocalizationController extends AbstractAIController
         if ($extension) {
             $assign['extkey'] = $extension;
             $xlfUtility = GeneralUtility::makeInstance(XliffUtility::class);
-            $assign['files'] = $xlfUtility->getFileList($availableExtensions[$assign['extkey']]);
+            $assign['files'] = $xlfUtility->getFileList($availableExtensions[$assign['extkey']]['packagePath']);
         }
         
         return $this->getViewAndTemplate($request, $assign, 'Templates/', 'T3AiLocalization/Index');
@@ -105,7 +105,7 @@ class T3AiLocalizationController extends AbstractAIController
     public function translateAction(ServerRequestInterface $request)
     {
         $data = $request->getParsedBody();
-        
+            
         if (!$data['targetLanguage']) {
             return new RedirectResponse($this->generateBackendUrl('ajax_file_localization', $data));
         }
@@ -144,27 +144,14 @@ class T3AiLocalizationController extends AbstractAIController
                     $data['message'] = $this->getLocallangTranslation('translation.noTranslationsNeeded.message');
                     $data['title'] = $this->getLocallangTranslation('translation.noTranslationsNeeded.title');
                     continue;
-                }
-                
-                $response = [];
-                $translationSubParts = array_chunk($translations, 20, true);
-                foreach ($translationSubParts as $subpart) {
-                    $responseJson = $this->translationService->requestAi(
-                        'Input JSON:\n ' . json_encode($subpart),
-                        'openAiPromptXlfTranslation',
-                        '',
-                        strtolower($data['targetLanguage']),
-                        []
-                    );
+                }   
 
-                    $response = $response ? array_merge($response, json_decode($responseJson, true)) : json_decode($responseJson, true);
-                }
-
-                
+                $responseData = $this->translationService->request($data['apiModel'], $data['targetLanguage'], $translations);
+                $response = json_decode($responseData['content'], true);
                 $dataValues['translations'][] = $response;
                 $xlfUtility = GeneralUtility::makeInstance(XliffUtility::class);
                 $originalValues = $xlfUtility->readXliff($data['extensionKey'], $dataValues['filename']);
-
+                
                 foreach ($originalValues as $origKey => $origValue) {
                     if (is_array($response)) {
                         if (array_key_exists($origKey, $response)) {
@@ -235,25 +222,12 @@ class T3AiLocalizationController extends AbstractAIController
                 $logEntries['status'] = $result['status'];
                 $this->localizationlogRepository->insertRecord($logEntries);
             }
+            return new JsonResponse(['status'=> true]);
 
         } catch (\Exception $exception) {
             return new JsonResponse(['status'=> false]);
         }
 
-        if ($this->typo3VersionArray['version_main'] === 11) {
-            $parameters = [
-                'tx_nst3ai_nst3ai_nst3aidashboard[controller]' => 'T3AiLocalization',
-                'tx_nst3ai_nst3ai_nst3aidashboard[action]' => 'index',
-                'opentab' => 'Translation'
-            ];
-            $redirectUrl = (string)$this->backendUriBuilder->buildUriFromRoutePath('/nitsan/nst3ai/dashboard', $parameters, 'share');
-        } else {
-            $parameters = ['controller' => 'T3AiLocalization', 'action' => 'index', 'opentab' => 'Translation'];
-            $redirectUrl = $this->generateBackendUrl('nitsan_nst3ai_dashboard', $parameters, 'share');
-        }
-
-
-        return new JsonResponse(['redirectUrl' => $redirectUrl, 'status'=> true]);
     }
 
     public function historyAction(ServerRequestInterface $request)
